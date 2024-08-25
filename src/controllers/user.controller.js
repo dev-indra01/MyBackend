@@ -189,6 +189,13 @@ const getCurrentUser = asyncHandler(async (req, res) => {
         .json(new ApiResponse(200, req.user, "User fetched successfully"))
 })
 
+
+const home = asyncHandler(async (req, res) => {
+    // console.log(req);
+    return "Hello this is home"
+})
+
+
 const updateAccountDetails = asyncHandler(async (req, res) => {
     const { fullName, email } = req.body
     if (!fullName || !email) { throw new ApiError(400, "All fields are required") }
@@ -401,5 +408,6 @@ export {
     updateUserAvatar,
     updateUserCoverImage,
     getUserChannelProfile,
-    getWatchHistory
+    getWatchHistory,
+    home
 }
