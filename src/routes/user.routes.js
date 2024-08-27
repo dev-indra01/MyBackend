@@ -10,11 +10,11 @@ router.route("/register")
 
 router.route("/login").post(loginUser)
 // router.route("/").get(home)
-router.get("/", function (_, res) { res.send("home page"); });
+router.get("/", function (_, res) { res.send("Home page"); });
 
 //secured routes
 
-router.route("/logout").post(verifyJWT, logoutUser)
+router.route("/logout").get(verifyJWT, logoutUser)
 router.route("/refresh-token").post(refreshAccessToken)
 router.route("/change-password").post(verifyJWT, changeCurrentPassword)
 router.route("/current-user").get(verifyJWT, getCurrentUser)
