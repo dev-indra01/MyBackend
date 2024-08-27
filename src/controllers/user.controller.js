@@ -127,12 +127,10 @@ const logoutUser = asyncHandler(async (req, res) => {
     },
         { new: true }
     )
-
     const options = {
         httpOnly: true,
         secure: true
     }
-
     return res
         .status(200)
         .clearCookie("accessToken", options)
@@ -172,9 +170,9 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
     // const user = await User.findById(decodedToken?._id).select("-password -refreshToken")
 
     const user = await User.findById(req.user?._id)
-    console.log(user);
+    // console.log(user);
     const isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
-    console.log(isPasswordCorrect);
+    // console.log(isPasswordCorrect);
     if (!isPasswordCorrect) { throw new ApiError(400, "Invalid old password") }
     user.password = newPassword
     await user.save({ validateBeforeSave: false })
@@ -183,18 +181,11 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 
 
 const getCurrentUser = asyncHandler(async (req, res) => {
-    console.log(req);
+    // console.log(req);
     return res
         .status(200)
         .json(new ApiResponse(200, req.user, "User fetched successfully"))
 })
-
-
-const home = asyncHandler(async (req, res) => {
-    // console.log(req);
-    return "Hello this is home"
-})
-
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
     const { fullName, email } = req.body
@@ -408,6 +399,5 @@ export {
     updateUserAvatar,
     updateUserCoverImage,
     getUserChannelProfile,
-    getWatchHistory,
-    home
+    getWatchHistory
 }
